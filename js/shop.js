@@ -2,7 +2,7 @@
 var products = [
    {
         id: 1,
-        name: 'cooking oil',
+        name: 'Cooking oil',
         price: 10.5,
         type: 'grocery',
         offer: {
@@ -164,6 +164,17 @@ function applyPromotionsCart() {
 // Exercise 6
 function printCart() {
     // Fill the shopping cart modal manipulating the shopping cart dom
+    let table = document.getElementById("cart_list");
+    table.innerHTML = "";
+    for (let i = 0; i < cart.length; i++) {
+        table.innerHTML += 
+            "<tr>"+
+            "<th>"+cart[i].name+"</th>"+
+            "<td>"+cart[i].price+"</td>"+
+            "<td>"+cart[i].quantity+"</td>"+
+            "<td>"+cart[i].subtotalWithDiscount+"</td>"+
+            "</tr>"
+    }
 }
 
 
