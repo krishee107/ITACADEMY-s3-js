@@ -17,6 +17,19 @@ nav .btn:hover{
 .nav-link:hover{
     color: var(--secondary-color) !important;
 }
+
+.shopInfo{
+    max-width: 35%;
+}
+
+header div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+header img{
+    max-width: 600px;
+}
 /* Items */
 .card-img-top {
     width: 250px;
