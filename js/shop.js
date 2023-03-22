@@ -144,9 +144,15 @@ function applyPromotionsCart() {
         //Hay aceite, buscamos el item
         let promoItem = cart.findIndex((p => p.id == 1));
         //Hay + de 3...
-            if(cart[promoItem].quantity >= 3 ){
+            if(cart[promoItem].quantity >= 3 && cart[promoItem].discount == false){
                 //Descontamos el dinero
                 cart[promoItem].subtotalWithDiscount -= 10;
+                cart[promoItem].discount = true;
+            }
+            //Si hay menos de 3 y la promo está en true... quitamos la promo
+            if(cart[promoItem].quantity < 3 && cart[promoItem].discount == true ){
+                cart[promoItem].discount = false;
+                cart[promoItem].subtotalWithDiscount = cart[promoItem].quantity * cart[promoItem].price;
             }
         }
 
@@ -156,9 +162,15 @@ function applyPromotionsCart() {
         //Hay aceite, buscamos el item
         let promoItem = cart.findIndex((p => p.id == 3));
         //Hay + de 3...
-            if(cart[promoItem].quantity >= 10 ){
+            if(cart[promoItem].quantity >= 10 && cart[promoItem].discount == false){
                 //Descontamos el dinero
                 cart[promoItem].subtotalWithDiscount -= cart[promoItem].subtotalWithDiscount * 2 / 3;
+                cart[promoItem].discount = true;
+            }
+            //Si hay menos de 10 y la promo está en true... quitamos la promo
+            if(cart[promoItem].quantity < 10 && cart[promoItem].discount == true ){
+                cart[promoItem].discount = false;
+                cart[promoItem].subtotalWithDiscount = cart[promoItem].quantity * cart[promoItem].price;
             }
         }
 }
@@ -213,6 +225,7 @@ function addToCart(id) {
             quantity: 1,
             subtotal: item.price,
             subtotalWithDiscount: item.price,
+            discount: false,
         });
     }
 }
@@ -224,6 +237,7 @@ function removeFromCart(id) {
 }
 
 function open_modal(){
+    applyPromotionsCart();
 	console.log("Open Modal");
 	printCart();
 }
