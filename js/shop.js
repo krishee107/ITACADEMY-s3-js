@@ -71,6 +71,7 @@ var cart = [];
 
 var total = 0;
 
+/*
 // Exercise 1
 function buy(id) {
     let item = null;
@@ -84,7 +85,7 @@ function buy(id) {
     cartList.push(item);
     console.log(cartList)
 }
-
+*/
 // Exercise 2
 function cleanCart() {
     cartList = []
@@ -103,6 +104,7 @@ function calculateTotal() {
     return total;
 }
 
+/*
 // Exercise 4
 function generateCart() {
     // Using the "cartlist" array that contains all the items in the shopping cart, 
@@ -132,7 +134,7 @@ function generateCart() {
 
     console.log(cart)
 }
-
+*/
 // Exercise 5
 function applyPromotionsCart() {
     // Apply promotions to each item in the array "cart"
@@ -184,7 +186,35 @@ function printCart() {
 function addToCart(id) {
     // Refactor previous code in order to simplify it 
     // 1. Loop for to the array products to get the item to add to cart
+    let item = null;
+    for (let i = 0; i < products.length; i++) {
+        if(products[i].id == id){
+            item = products[i];
+        }
+    }
+
     // 2. Add found product to the cart array or update its quantity in case it has been added previously.
+    
+    //Buscamos si hay repetidos
+    if(cart.filter(p => p.id == item.id).length > 0 ){
+        //Buscamos el objeto y lo actualizamos
+        let updateItem = cart.findIndex((p => p.id == item.id));
+        cart[updateItem].quantity += 1;
+        cart[updateItem].subtotal += item.price;
+        cart[updateItem].subtotalWithDiscount += item.price;
+    }
+    //Si no existe, lo creamos
+    else{
+        cart.push({
+            id: item.id,
+            name: item.name,
+            price: item.price,
+            type: item.type,
+            quantity: 1,
+            subtotal: item.price,
+            subtotalWithDiscount: item.price,
+        });
+    }
 }
 
 // Exercise 8
