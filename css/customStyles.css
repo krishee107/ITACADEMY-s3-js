@@ -1,0 +1,25 @@
+:root{
+    --primary-color:#f2eaf6;
+    --secondary-color:rgb(153, 0, 255);
+}
+
+/* Header */
+nav, header{
+    background-color: var(--primary-color);
+}
+
+nav .btn:hover{
+    color: var(--secondary-color);
+    border-color:var(--secondary-color);
+    background-color: white;
+}
+
+.nav-link:hover{
+    color: var(--secondary-color) !important;
+}
+/* Items */
+.card-img-top {
+    width: 250px;
+    height: 250px;
+    margin: 0 auto;
+}
