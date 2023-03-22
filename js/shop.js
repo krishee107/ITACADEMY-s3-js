@@ -149,11 +149,6 @@ function applyPromotionsCart() {
                 cart[promoItem].subtotalWithDiscount -= 10;
                 cart[promoItem].discount = true;
             }
-            //Si hay menos de 3 y la promo está en true... quitamos la promo
-            if(cart[promoItem].quantity < 3 && cart[promoItem].discount == true ){
-                cart[promoItem].discount = false;
-                cart[promoItem].subtotalWithDiscount = cart[promoItem].quantity * cart[promoItem].price;
-            }
         }
 
     //Instant cupcake mixture 10 o + =  precio - 2/3 
@@ -166,11 +161,6 @@ function applyPromotionsCart() {
                 //Descontamos el dinero
                 cart[promoItem].subtotalWithDiscount -= cart[promoItem].subtotalWithDiscount * 2 / 3;
                 cart[promoItem].discount = true;
-            }
-            //Si hay menos de 10 y la promo está en true... quitamos la promo
-            if(cart[promoItem].quantity < 10 && cart[promoItem].discount == true ){
-                cart[promoItem].discount = false;
-                cart[promoItem].subtotalWithDiscount = cart[promoItem].quantity * cart[promoItem].price;
             }
         }
 }
@@ -228,16 +218,31 @@ function addToCart(id) {
             discount: false,
         });
     }
+
+    
+    applyPromotionsCart();
 }
 
 // Exercise 8
 function removeFromCart(id) {
     // 1. Loop for to the array products to get the item to add to cart
-    // 2. Add found product to the cartList array
+    for (let i = 0; i < cart.length; i++) {
+       if(cart[i].id == id && cart[i].quantity >= 2){
+            //Actualizamos valores  
+            cart[i].quantity -= 1;
+            cart[i].subtotal = cart[i].price * cart[i].quantity;
+            cart[i].subtotalWithDiscount = cart[i].price * cart[i].quantity;
+            cart[i].discount = false;
+       }
+       else if(cart[i].id == id && cart[i].quantity <= 1){
+        cart[i] = [];
+       }
+        
+    applyPromotionsCart();
+    }
 }
 
 function open_modal(){
-    applyPromotionsCart();
 	console.log("Open Modal");
 	printCart();
 }
