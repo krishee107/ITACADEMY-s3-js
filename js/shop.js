@@ -169,7 +169,7 @@ function applyPromotionsCart() {
 function printCart() {
     // Fill the shopping cart modal manipulating the shopping cart dom
     let table = document.getElementById("cart_list");
-    table.innerHTML = "";
+    table.innerHTML = " ";
     for (let i = 0; i < cart.length; i++) {
         table.innerHTML += 
             "<tr>"+
@@ -177,8 +177,10 @@ function printCart() {
             "<td>"+cart[i].price+"</td>"+
             "<td>"+cart[i].quantity+"</td>"+
             "<td>"+cart[i].subtotalWithDiscount+"</td>"+
+            "<td onclick='removeFromCart("+cart[i].id+"); printCart()'> <i class='fa-sharp fa-solid fa-minus'></i> </td>"+
             "</tr>"
     }
+
 }
 
 
@@ -235,7 +237,11 @@ function removeFromCart(id) {
             cart[i].discount = false;
        }
        else if(cart[i].id == id && cart[i].quantity <= 1){
-        cart[i] = [];
+        const item = cart.findIndex((p) => p.id === cart[i].id);
+
+        if( item > -1) {
+            cart.splice(item, 1);
+        }
        }
         
     applyPromotionsCart();
