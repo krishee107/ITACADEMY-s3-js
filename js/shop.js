@@ -114,6 +114,7 @@ function generateCart() {
             let updateItem = cart.findIndex((p => p.id == cartList[i].id));
             cart[updateItem].quantity += 1;
             cart[updateItem].subtotal += cartList[i].price;
+            cart[updateItem].subtotalWithDiscount += cartList[i].price;
         }
         //Si no existe, lo creamos
         else{
@@ -135,6 +136,29 @@ function generateCart() {
 // Exercise 5
 function applyPromotionsCart() {
     // Apply promotions to each item in the array "cart"
+    //3 o + de aceite = precio -10€
+    //Buscamos si hay aceite...
+    if(cart.filter(p => p.id == 1).length > 0 ){
+        //Hay aceite, buscamos el item
+        let promoItem = cart.findIndex((p => p.id == 1));
+        //Hay + de 3...
+            if(cart[promoItem].quantity >= 3 ){
+                //Descontamos el dinero
+                cart[promoItem].subtotalWithDiscount -= 10;
+            }
+        }
+
+    //Instant cupcake mixture 10 o + =  precio - 2/3 
+    //Buscamos el mix de cupcake...
+    if(cart.filter(p => p.id == 3).length > 0 ){
+        //Hay aceite, buscamos el item
+        let promoItem = cart.findIndex((p => p.id == 3));
+        //Hay + de 3...
+            if(cart[promoItem].quantity >= 10 ){
+                //Descontamos el dinero
+                cart[promoItem].subtotalWithDiscount -= cart[promoItem].subtotalWithDiscount * 2 / 3;
+            }
+        }
 }
 
 // Exercise 6
