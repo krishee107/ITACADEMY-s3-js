@@ -107,6 +107,29 @@ function calculateTotal() {
 function generateCart() {
     // Using the "cartlist" array that contains all the items in the shopping cart, 
     // generate the "cart" array that does not contain repeated items, instead each item of this array "cart" shows the quantity of product.
+    for (let i = 0; i < cartList.length; i++) {
+        //Buscamos si hay repetidos por cada objeto del otro array
+        if(cart.filter(p => p.id == cartList[i].id).length > 0 ){
+            //Buscamos el objeto y lo actualizamos
+            let updateItem = cart.findIndex((p => p.id == cartList[i].id));
+            cart[updateItem].quantity += 1;
+            cart[updateItem].subtotal += cartList[i].price;
+        }
+        //Si no existe, lo creamos
+        else{
+            cart.push({
+                id: cartList[i].id,
+                name: cartList[i].name,
+                price: cartList[i].price,
+                type: cartList[i].type,
+                quantity: 1,
+                subtotal: cartList[i].price,
+                subtotalWithDiscount: cartList[i].price,
+            });
+        }
+    }
+
+    console.log(cart)
 }
 
 // Exercise 5
