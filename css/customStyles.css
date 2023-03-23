@@ -3,6 +3,11 @@
     --secondary-color:rgb(168, 118, 248);
 }
 
+html, body{
+    width: 100vw;
+    min-height: 100vh;
+    position: relative;
+}
 /* Header */
 nav, header{
     background-color: var(--primary-color);
@@ -13,7 +18,7 @@ nav .btn:hover{
     border-color:var(--secondary-color);
     background-color: white;
 }
-
+.nav-link{color: black !important;}
 .nav-link:hover{
     color: var(--secondary-color) !important;
 }
@@ -35,7 +40,7 @@ header img{
 section h2{
     color: var(--secondary-color)
 }
-section button:hover{
+section button:hover, form button:hover{
     background-color: white !important;
     color: var(--secondary-color) !important;
     border-color: var(--secondary-color) !important;
@@ -52,4 +57,27 @@ section button:hover{
     width: 250px;
     height: 250px;
     margin: 0 auto;
+}
+
+/*Modal*/
+.modal-body a{
+    background-color: var(--secondary-color);
+    border: none;
+}
+.modal-body a:hover{
+    background-color: white;
+    border: 1px solid  var(--secondary-color);
+    color: var(--secondary-color);
+}
+
+/* CHeckout form*/
+form button{
+    background-color: var(--secondary-color) !important;
+    border-color: transparent !important;
+}
+
+footer{
+    position: absolute;
+    bottom: -50px;
+    width: 100%;
 }
